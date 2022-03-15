@@ -23,9 +23,9 @@ const userSchema = new mongoose.Schema(
       maxLength: 20,
       minLength: 8,
     },
-    label: {
-      type: String,
-      default: "user", //label: admin,user
+    isAdmin: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
@@ -38,7 +38,7 @@ userSchema.methods.generateToken = function () {
     {
       id: this._id,
       email: this.email,
-      label: this.label,
+      name: this.name,
     },
     process.env.JWTSECRET_KEY,
     { expiresIn: 2 * 60 * 60 }
